@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, unitial-scale=1.0">
+        <link rel="stylesheet" href="/assets/semantic/semantic.css">
+        <link rel="stylesheet" href="/assets/style.css">
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/semantic/semantic.js"></script>
+        <title>Gestion des notes</title>
+    </head>
+
+    <body>
+
+        <!--- side bar --->
+            <%- include('sidebar'); -%>
+        <!--- side bar --->
+
+        <!--- top nav --->
+        <nav class="ui top fixed inverted menu">
+            <div class="left menu">
+                <a href="#" class="siderbar-menu-togglar item" data-target="#sideber">
+                    <i class="sidebar icon"></i>
+                </a>
+                <a href="#" class="header item">
+                    GESTION DES NOTES
+                </a>
+            </div>
+            <div class="right menu">
+                <a href="#" class="item">
+                    <i class="bell icon"></i>
+                </a>
+                <div class="ui dropdown item">
+                    <i class="ui user circle icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">
+                            <i class="info circle icon"></i> Profile
+                        </a>
+                        <a href="#" class="item">
+                            <i class="wrench icon"></i> Paramètres
+                        </a>
+                        <a href="#" class="item">
+                            <i class="sign-out icon"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--- top nav --->
+
+        <!--- section --->
+
+        <div class="pusher" style="margin-left: 20px; margin-right: 20px;">
+            <div class="main-content">
+                <h1 style="text-align: center; margin-top: 60px;"><i class="icon file alternate"></i> Listes des notes</h1>
+                <br>
+                <div class="ui segment">
+                    <a href="/ajout_note" class="ui button blue"><i class="ui icon plus square"></i> Ajouter note</a>
+                    <div class="ui mini action input" style="float: right;">
+                        <input type="text" id="myInput" placeholder="Recherche...">
+                        <button class="ui mini icon button">
+                            <i class="search icon"></i>
+                        </button>
+                    </div>
+                    <table class="ui selectable inverted table ">
+                        <thead>
+                            <tr>
+                                <th>Code Matière</th>
+                                <th>N° Inscription</th>
+                                <th>Note</th>
+                                <th>NotePonderee</th>
+                                <th>Action</th> 
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            <% for (var i = 0; i < note.length; i++) { %>
+                                <tr>
+                                    <td><%= note[i].CodeMatiere %></td>
+                                    <td><%= note[i].NumInscription %></td>
+                                    <td><%= note[i].Note %></td>
+                                    <td><%= note[i].NotePonderee %></td>                                
+                                    <td>
+                                        <a href="/modifier_note/idnote=<%= note[i].id %>" class="ui button positive"><i class="icon edit"></i> Modifier</a>
+                                        <a href="supprimer_note/idnote=<%= note[i].id %>" class="ui button negative"><i class="icon trash alternate"></i> Supprimer</a>
+                                    </td>
+                                </tr>
+                            <% }; %>
+                        </tbody>
+                    </table>    
+                </div>             
+            </div>
+        </div>
+        
+        <!--- section --->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/semantic/semantic.js"></script>
+        <script src="/assets/script.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                  $("#myInput").on("keyup", function(){
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+        </script>
+
+    </body>
+</html>

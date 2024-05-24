@@ -1,0 +1,17 @@
+<data name="StudentDataService" serviceNamespace="http://wso2.org/StudentDataService">
+   <config id="MySQLDataSource">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://localhost:3306/bdnotes</property>
+      <property name="username">root</property>
+      <property name="password"></property>
+   </config>
+   <query id="selectAllStudents" useConfig="MySQLDataSource">
+      <sql>SELECT * FROM students</sql>
+      <result element="Students" rowName="Student">
+         <element column="id" name="ID"/>
+         <element column="name" name="Name"/>
+         <!-- Add other columns as needed -->
+      </result>
+   </query>
+   <!-- Add other queries as needed -->
+</data>

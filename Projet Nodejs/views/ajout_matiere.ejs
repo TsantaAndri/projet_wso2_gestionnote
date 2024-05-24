@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, unitial-scale=1.0">
+        <link rel="stylesheet" href="/assets/semantic/semantic.css">
+        <link rel="stylesheet" href="/assets/style.css">
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/semantic/semantic.js"></script>
+        <title>Gestion des notes</title>
+    </head>
+
+    <body>
+
+        <!--- side bar --->
+            <%- include('sidebar'); -%>
+        <!--- side bar --->
+
+        <!--- top nav --->
+        <nav class="ui top fixed inverted menu">
+            <div class="left menu">
+                <a href="#" class="siderbar-menu-togglar item" data-target="#sideber">
+                    <i class="sidebar icon"></i>
+                </a>
+                <a href="#" class="header item">
+                    GESTION DES NOTES
+                </a>
+            </div>
+            <div class="right menu">
+                <a href="#" class="item">
+                    <i class="bell icon"></i>
+                </a>
+                <div class="ui dropdown item">
+                    <i class="ui user circle icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">
+                            <i class="info circle icon"></i> Profile
+                        </a>
+                        <a href="#" class="item">
+                            <i class="wrench icon"></i> Paramètres
+                        </a>
+                        <a href="#" class="item">
+                            <i class="sign-out icon"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--- top nav --->
+
+        <!--- section --->
+
+        <div class="pusher" style="margin-left: 20px; margin-right: 20px;">
+            <div class="main-content">
+                <h1 style="text-align: center; margin-top: 60px;"><i class="ui icon th list"></i> Ajouter une matière</h1>
+                    <div class="ui segment">
+                        <form action="/save" method="post" class="ui form">
+                            <% if (locals.flash && locals.flash.error) { %>
+                                <div class="ui mini red message mt-3">
+                                    <i class="close icon"></i>
+                                    <div class="header"><h3 style="text-align: center;">Alerte !</h3></div>
+                                    <div class="list">
+                                        <h5 style="text-align: center;"><%= flash.error %></h5>
+                                    </div>
+                                </div>
+                            <% } %>
+
+                            <div class="field">
+                                <label>Code Matière :</label>
+                                <input type="text" name="cd" placeholder="Entrez le code matière..." required>
+                            </div>
+                            <div class="field">
+                                <label>Désignation :</label>
+                                <input type="text" name="design" placeholder="Entrez la désignation..." required>
+                            </div>
+                            <div class="field">
+                                <label>Coéf :</label>
+                                <input type="text" name="coef" placeholder="Entrez la coéfficient..." required>
+                            </div>
+
+                            <button class="ui button blue" type="submit"><i class="ui icon save"></i> Enregistrer</button>
+                            <a href="/listes_matiere" class="ui button orange" type="submit"><i class="ui icon close"></i> Annuler</a>
+                        </form>
+                    </div>              
+            </div>
+        </div>
+
+        <!--- section --->
+
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/semantic/semantic.js"></script>
+        <script src="/assets/script.js"></script>
+
+        <script>
+            $(document).ready( function(){
+                $('.close').click(function(){
+                    $('.message').hide('slow');
+                });
+            });
+        </script>
+
+    </body>
+</html>

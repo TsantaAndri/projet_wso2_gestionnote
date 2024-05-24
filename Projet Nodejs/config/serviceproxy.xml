@@ -1,0 +1,26 @@
+<proxy name="StudentProxyService" transports="http,https" startOnLoad="true">
+   <target>
+      <inSequence>
+         <log level="full"/>
+         <!-- Define the logic for each route -->
+         <filter source="get-property('REST_FULL_REQUEST_PATH')" regex="/menu_principal">
+            <send>
+               <endpoint>
+                  <address uri="http://localhost:8280/services/StudentDataService/selectAllStudents"/>
+               </endpoint>
+            </send>
+         </filter>
+         <!-- Add other routes similarly -->
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <send/>
+      </outSequence>
+      <faultSequence>
+         <log level="full"/>
+         <property name="ERROR_MESSAGE" value="Error occurred in proxy service"/>
+         <send/>
+      </faultSequence>
+   </target>
+   <description>Proxy service to handle student operations</description>
+</proxy>
